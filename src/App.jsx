@@ -94,7 +94,7 @@ const Home = () => {
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 flex flex-col lg:flex-row gap-8 lg:gap-12">
+      <div className="relative z-10 max-w-[1920px] mx-auto px-6 lg:px-12 xl:px-24 py-12 md:py-16 flex flex-col lg:flex-row gap-8 lg:gap-12">
         
         {/* Main Content Area */}
         <div className="flex-1 min-w-0">
@@ -262,10 +262,11 @@ const Home = () => {
 
             <div className="space-y-6">
               {trainingModulesData.map((module) => (
-                <div key={module.id} className="group">
-                  <h3 className="text-sm font-bold text-slate-300 mb-3 px-1 uppercase tracking-wider">
+                <details key={module.id} className="group" open>
+                  <summary className="text-sm font-bold text-slate-300 mb-3 px-1 uppercase tracking-wider cursor-pointer list-none [&::-webkit-details-marker]:hidden flex justify-between items-center hover:text-indigo-400 transition-colors">
                     {module.heading}
-                  </h3>
+                    <Icons.ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180 text-slate-500 group-hover:text-indigo-400" />
+                  </summary>
                   <div className="space-y-2">
                     {module.subModules.map((subMod) => {
                       const Icon = subMod.icon;
@@ -304,24 +305,11 @@ const Home = () => {
                       );
                     })}
                   </div>
-                </div>
+                </details>
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-800/60">
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-2 opacity-10">
-                  <Archive className="w-16 h-16" />
-                </div>
-                <h4 className="text-sm font-semibold text-slate-200 mb-1 relative z-10">Need full access?</h4>
-                <p className="text-xs text-slate-400 mb-3 relative z-10 leading-relaxed">
-                  Authentication is required to download classified field data and modules.
-                </p>
-                <button className="w-full py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-500/20 relative z-10">
-                  Sign In to Access
-                </button>
-              </div>
-            </div>
+
           </div>
         </aside>
 
@@ -348,7 +336,7 @@ const VisualizationLayout = ({ viz, children }) => {
   return (
     <>
       <header className="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-[100] shadow-md font-sans">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="max-w-[1920px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
               <span className="p-1.5 bg-indigo-500/20 rounded-lg">
