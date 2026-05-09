@@ -553,6 +553,7 @@ export const metadata = {
   title: 'Relief Displacement',
   description: 'Interactive exploration of photogrammetric relief displacement, based on spatial geometry. Understand how terrain affects image projection.',
   iconName: 'Mountain',
+  category: 'Photogrammetry',
   color: 'from-indigo-500 to-purple-600',
   status: 'Available'
 };

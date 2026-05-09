@@ -18,6 +18,9 @@ export const metadata = {
   // iconName: Any valid icon name from the 'lucide-react' library (e.g., 'Mountain', 'MapPin', 'Layers')
   iconName: 'Box',
   
+  // category: Used to filter visualizations (e.g., 'Photogrammetry', 'Physics', 'Geography')
+  category: 'General',
+  
   // status: Displayed as a badge on the card. Usually 'Available' or 'Coming Soon'
   status: 'Available'
 };
