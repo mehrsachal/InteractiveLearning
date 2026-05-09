@@ -1,0 +1,26 @@
+/* 
+  COPY AND PASTE THIS METADATA BLOCK AT THE BOTTOM OF YOUR NEW .JSX VISUALIZATION FILES.
+  
+  This allows the Gallery (Index page) to dynamically read and display your visualization
+  with a beautiful card and proper routing, without any manual app configuration!
+*/
+
+export const metadata = {
+  // id: This will be the URL path (e.g., /my-awesome-viz)
+  id: 'my-awesome-viz',
+  
+  // title: The title displayed on the Gallery card
+  title: 'My Awesome Visualization',
+  
+  // description: A short summary of what this visualization does
+  description: 'An interactive exploration of complex geospatial concepts.',
+  
+  // iconName: Any valid icon name from the 'lucide-react' library (e.g., 'Mountain', 'MapPin', 'Layers')
+  iconName: 'Box',
+  
+  // status: Displayed as a badge on the card. Usually 'Available' or 'Coming Soon'
+  status: 'Available'
+};
+
+// DON'T FORGET to export your component as default!
+// export default MyVisualizationComponent;

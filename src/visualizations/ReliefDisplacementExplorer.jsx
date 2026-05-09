@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Settings2, BookOpen, Info, Target, Calculator, ArrowRight } from 'lucide-react';
+import { Settings2, BookOpen, Info, Target, Calculator, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ReliefDisplacementExplorer = () => {
   // Application State
@@ -113,7 +114,11 @@ const ReliefDisplacementExplorer = () => {
     <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
       <div className="max-w-6xl mx-auto space-y-6">
         
-        <header className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <header className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 mb-4 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Gallery
+          </Link>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Relief Displacement Visualizer</h1>
           <p className="text-slate-600">Interactive exploration of photogrammetric relief displacement, based on spatial geometry.</p>
         </header>
@@ -541,6 +546,15 @@ const ReliefDisplacementExplorer = () => {
       </div>
     </div>
   );
+};
+
+export const metadata = {
+  id: 'relief-displacement',
+  title: 'Relief Displacement',
+  description: 'Interactive exploration of photogrammetric relief displacement, based on spatial geometry. Understand how terrain affects image projection.',
+  iconName: 'Mountain',
+  color: 'from-indigo-500 to-purple-600',
+  status: 'Available'
 };
 
 export default ReliefDisplacementExplorer;
