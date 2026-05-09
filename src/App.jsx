@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
-import { MapPin, ChevronRight, Code, Search, Github, User } from 'lucide-react';
+import { MapPin, ChevronRight, Code, Search, ExternalLink, User } from 'lucide-react';
 
 // Dynamically import all JSX files from the visualizations folder
 const visualizationModules = import.meta.glob('./visualizations/*.jsx', { eager: true });
@@ -74,7 +74,7 @@ const Home = () => {
                 <div className="flex flex-col items-center md:items-start gap-2">
                   <a href={githubData.html_url || "https://github.com/mehrsachal"} target="_blank" rel="noreferrer" className="text-2xl font-bold text-slate-100 hover:text-indigo-400 transition-colors flex items-center gap-2 group">
                     {githubData.name || githubData.login || "Mehr Sachal"}
-                    <Github className="w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" />
+                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" />
                   </a>
                   <p className="text-slate-400 text-sm max-w-md leading-relaxed">
                     {githubData.bio || "Passionate about interactive learning and geospatial visualizations."}
@@ -110,7 +110,7 @@ const Home = () => {
               <span>Interactive Learning Hub</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-              Geospatial Visualisation Gallery
+              Sachal's Interactive Library
             </h1>
             <p className="text-lg text-slate-400 leading-relaxed">
               Explore complex photogrammetry and remote sensing concepts through interactive, physics-based simulations.
