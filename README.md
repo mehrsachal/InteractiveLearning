@@ -1,16 +1,20 @@
-# React + Vite
+# Interactive Learning Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Mission:** To make learning fun and more accessible using visual interactions.
 
-Currently, two official plugins are available:
+[Visit the Geospatial Visualisation Gallery](https://mehrsachal.github.io/InteractiveLearning/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About
 
-## React Compiler
+This project is an interactive gallery built with React and Vite. It aims to explore complex photogrammetry and remote sensing concepts through interactive, physics-based simulations.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Features
+- Geospatial visualisations
+- Search and filter by categories
+- Dynamic GitHub profile integration
 
-## Expanding the ESLint configuration
+## Running Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm run dev`
