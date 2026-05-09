@@ -262,7 +262,7 @@ const Home = () => {
 
             <div className="space-y-6">
               {trainingModulesData.map((module) => (
-                <details key={module.id} className="group" open>
+                <details key={module.id} className="group">
                   <summary className="text-sm font-bold text-slate-300 mb-3 px-1 uppercase tracking-wider cursor-pointer list-none [&::-webkit-details-marker]:hidden flex justify-between items-center hover:text-indigo-400 transition-colors">
                     {module.heading}
                     <Icons.ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180 text-slate-500 group-hover:text-indigo-400" />
