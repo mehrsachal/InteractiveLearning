@@ -26,33 +26,43 @@ const visualisations = Object.entries(visualizationModules).map(([path, module])
   };
 }).sort((a, b) => a.lastModified - b.lastModified); // Sort chronologically (oldest to newest)
 
-// Training Modules Data
-const trainingModulesData = [
-  {
-    id: 'agt-1',
-    heading: 'AGT-1: Foundations',
-    subModules: [
-      { id: 'agt-1-pdf', title: 'Module Syllabus & Guide', type: 'pdf', size: '2.4 MB', icon: FileText, color: 'text-red-400' },
-      { id: 'agt-1-zip', title: 'Photogrammetry Datasets', type: 'zip', size: '1.2 GB', icon: Archive, color: 'text-amber-400' }
-    ]
-  },
-  {
-    id: 'agt-2',
-    heading: 'AGT-2: Advanced Techniques',
-    subModules: [
-      { id: 'agt-2-pdf', title: 'Advanced Methodology', type: 'pdf', size: '3.1 MB', icon: FileText, color: 'text-red-400' },
-      { id: 'agt-2-zip', title: 'Point Cloud Extracts', type: 'zip', size: '4.5 GB', icon: Archive, color: 'text-amber-400' }
-    ]
-  },
-  {
-    id: 'agt-3',
-    heading: 'AGT-3: Field Applications',
-    subModules: [
-      { id: 'agt-3-pdf', title: 'Field Operations Manual', type: 'pdf', size: '1.8 MB', icon: FileText, color: 'text-red-400' },
-      { id: 'agt-3-zip', title: 'Case Study Assets', type: 'zip', size: '850 MB', icon: Archive, color: 'text-amber-400' }
-    ]
+// Dynamically import all files from the trg-modules folder to get their URLs
+const trgFilesUrls = import.meta.glob('./trg-modules/**/*.{pdf,zip}', { eager: true, query: '?url', import: 'default' });
+
+// Process into a structured array
+const trainingModulesMap = {};
+
+Object.entries(trgFilesUrls).forEach(([path, url]) => {
+  // path looks like './trg-modules/AGT1 - Labs/Module 1.pdf'
+  const parts = path.split('/');
+  if (parts.length < 4) return;
+  
+  const folder = parts[2]; // e.g., 'AGT1 - Labs'
+  const fileName = parts[3]; // e.g., 'Module 1.pdf'
+  
+  const isPdf = fileName.toLowerCase().endsWith('.pdf');
+  const isZip = fileName.toLowerCase().endsWith('.zip');
+  
+  if (!trainingModulesMap[folder]) {
+    trainingModulesMap[folder] = {
+      id: folder.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      heading: folder,
+      subModules: []
+    };
   }
-];
+  
+  trainingModulesMap[folder].subModules.push({
+    id: fileName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    title: fileName.replace(/\.(pdf|zip)$/i, ''),
+    type: isPdf ? 'pdf' : (isZip ? 'zip' : 'file'),
+    size: isPdf ? 'Guide' : 'Data', // Generic label for file type
+    icon: isPdf ? FileText : Archive,
+    color: isPdf ? 'text-red-400' : 'text-amber-400',
+    url: url
+  });
+});
+
+const trainingModulesData = Object.values(trainingModulesMap).sort((a, b) => a.heading.localeCompare(b.heading));
 
 // Premium Landing Page Component
 const Home = () => {
@@ -282,12 +292,14 @@ const Home = () => {
                               </div>
                             </div>
                           </div>
-                          <button 
+                          <a 
+                            href={subMod.url}
+                            download={subMod.title}
                             className="p-2 text-slate-500 hover:text-indigo-400 hover:bg-indigo-500/10 rounded-xl transition-colors shrink-0"
                             title="Download File"
                           >
                             <Download className="w-4 h-4" />
-                          </button>
+                          </a>
                         </div>
                       );
                     })}
