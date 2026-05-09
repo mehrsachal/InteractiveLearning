@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
-import { ChevronRight, Code, Search, ExternalLink, User } from 'lucide-react';
+import { ChevronRight, Code, Search, ExternalLink, User, BookOpen, Download, FileText, Archive } from 'lucide-react';
 
 // Dynamically import all JSX files from the visualizations folder
 const visualizationModules = import.meta.glob('./visualizations/*.jsx', { eager: true });
@@ -25,6 +25,34 @@ const visualisations = Object.entries(visualizationModules).map(([path, module])
     lastModified: module.__lastModified || 0,
   };
 }).sort((a, b) => a.lastModified - b.lastModified); // Sort chronologically (oldest to newest)
+
+// Training Modules Data
+const trainingModulesData = [
+  {
+    id: 'agt-1',
+    heading: 'AGT-1: Foundations',
+    subModules: [
+      { id: 'agt-1-pdf', title: 'Module Syllabus & Guide', type: 'pdf', size: '2.4 MB', icon: FileText, color: 'text-red-400' },
+      { id: 'agt-1-zip', title: 'Photogrammetry Datasets', type: 'zip', size: '1.2 GB', icon: Archive, color: 'text-amber-400' }
+    ]
+  },
+  {
+    id: 'agt-2',
+    heading: 'AGT-2: Advanced Techniques',
+    subModules: [
+      { id: 'agt-2-pdf', title: 'Advanced Methodology', type: 'pdf', size: '3.1 MB', icon: FileText, color: 'text-red-400' },
+      { id: 'agt-2-zip', title: 'Point Cloud Extracts', type: 'zip', size: '4.5 GB', icon: Archive, color: 'text-amber-400' }
+    ]
+  },
+  {
+    id: 'agt-3',
+    heading: 'AGT-3: Field Applications',
+    subModules: [
+      { id: 'agt-3-pdf', title: 'Field Operations Manual', type: 'pdf', size: '1.8 MB', icon: FileText, color: 'text-red-400' },
+      { id: 'agt-3-zip', title: 'Case Study Assets', type: 'zip', size: '850 MB', icon: Archive, color: 'text-amber-400' }
+    ]
+  }
+];
 
 // Premium Landing Page Component
 const Home = () => {
@@ -56,9 +84,12 @@ const Home = () => {
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 md:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 flex flex-col lg:flex-row gap-8 lg:gap-12">
         
-        {/* Profile & Mission Section */}
+        {/* Main Content Area */}
+        <div className="flex-1 min-w-0">
+          
+          {/* Profile & Mission Section */}
         <div className="mb-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-8 bg-slate-900/40 p-8 rounded-3xl border border-slate-800/60 backdrop-blur-sm shadow-xl">
           <div className="flex-1 space-y-4 text-center md:text-left">
             <h2 className="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2 mb-6">
@@ -204,6 +235,84 @@ const Home = () => {
             );
           })}
         </div>
+        </div>
+
+        {/* Sidebar Area: Training Modules */}
+        <aside className="w-full lg:w-80 xl:w-96 shrink-0 space-y-6">
+          <div className="bg-slate-900/40 p-6 rounded-3xl border border-slate-800/60 backdrop-blur-sm shadow-xl sticky top-24">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800/60">
+              <div className="p-2 bg-indigo-500/20 rounded-xl">
+                <BookOpen className="w-6 h-6 text-indigo-400" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white">Training Modules</h2>
+                <p className="text-xs text-slate-400 mt-1">Download resources and datasets</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {trainingModulesData.map((module) => (
+                <div key={module.id} className="group">
+                  <h3 className="text-sm font-bold text-slate-300 mb-3 px-1 uppercase tracking-wider">
+                    {module.heading}
+                  </h3>
+                  <div className="space-y-2">
+                    {module.subModules.map((subMod) => {
+                      const Icon = subMod.icon;
+                      return (
+                        <div 
+                          key={subMod.id} 
+                          className="flex items-center justify-between p-3 rounded-2xl bg-slate-800/30 border border-slate-700/30 hover:border-indigo-500/30 hover:bg-slate-800/60 transition-all cursor-pointer group/item"
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden">
+                            <div className="p-2 bg-slate-900 rounded-lg group-hover/item:shadow-inner shrink-0">
+                              <Icon className={`w-4 h-4 ${subMod.color}`} />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-sm font-medium text-slate-200 truncate pr-2">
+                                {subMod.title}
+                              </p>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-slate-900 text-slate-400 uppercase tracking-widest">
+                                  {subMod.type}
+                                </span>
+                                <span className="text-xs text-slate-500">
+                                  {subMod.size}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <button 
+                            className="p-2 text-slate-500 hover:text-indigo-400 hover:bg-indigo-500/10 rounded-xl transition-colors shrink-0"
+                            title="Download File"
+                          >
+                            <Download className="w-4 h-4" />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-slate-800/60">
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-2 opacity-10">
+                  <Archive className="w-16 h-16" />
+                </div>
+                <h4 className="text-sm font-semibold text-slate-200 mb-1 relative z-10">Need full access?</h4>
+                <p className="text-xs text-slate-400 mb-3 relative z-10 leading-relaxed">
+                  Authentication is required to download classified field data and modules.
+                </p>
+                <button className="w-full py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-500/20 relative z-10">
+                  Sign In to Access
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+
       </div>
     </div>
   );
