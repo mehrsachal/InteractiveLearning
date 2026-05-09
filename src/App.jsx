@@ -94,55 +94,60 @@ const Home = () => {
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-[1920px] mx-auto px-6 lg:px-12 xl:px-24 py-12 md:py-16 flex flex-col lg:flex-row gap-8 lg:gap-12">
+      <div className="relative z-10 max-w-[1920px] mx-auto px-6 lg:px-12 xl:px-24 py-12 md:py-16 flex flex-col xl:flex-row gap-8 lg:gap-12">
         
+        {/* Left Sidebar: Creator & Mission */}
+        <aside className="w-full xl:w-80 2xl:w-96 shrink-0 space-y-6">
+          <div className="bg-slate-900/40 p-6 rounded-3xl border border-slate-800/60 backdrop-blur-sm shadow-xl sticky top-24 space-y-8">
+            {/* About the Creator */}
+            <div className="space-y-4 text-center xl:text-left">
+              <h2 className="text-xl font-bold text-white flex items-center justify-center xl:justify-start gap-2 mb-6">
+                <User className="w-5 h-5 text-indigo-400" />
+                About the Creator
+              </h2>
+              {githubData ? (
+                <div className="flex flex-col items-center xl:items-start gap-4">
+                  <img 
+                    src={githubData.avatar_url || "https://github.com/mehrsachal.png"} 
+                    alt="Profile" 
+                    className="w-24 h-24 rounded-full border-2 border-indigo-500/30 shadow-lg shadow-indigo-500/20"
+                  />
+                  <div className="flex flex-col items-center xl:items-start gap-2">
+                    <a href={githubData.html_url || "https://github.com/mehrsachal"} target="_blank" rel="noreferrer" className="text-2xl font-bold text-slate-100 hover:text-indigo-400 transition-colors flex items-center gap-2 group text-center xl:text-left">
+                      {githubData.name || githubData.login || "Mehr Sachal"}
+                      <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors inline-block ml-1" />
+                    </a>
+                    <p className="text-slate-400 text-sm leading-relaxed text-center xl:text-left">
+                      {githubData.bio || "Passionate about interactive learning and geospatial visualizations."}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="animate-pulse flex flex-col items-center xl:items-start gap-6">
+                  <div className="w-24 h-24 rounded-full bg-slate-800"></div>
+                  <div className="space-y-3 w-full flex flex-col items-center xl:items-start">
+                    <div className="w-3/4 h-6 bg-slate-800 rounded"></div>
+                    <div className="w-full h-4 bg-slate-800 rounded"></div>
+                    <div className="w-5/6 h-4 bg-slate-800 rounded"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Mission Statement */}
+            <div className="space-y-4 border-t border-slate-800/60 pt-8 text-center xl:text-left">
+              <div className="inline-flex items-center justify-center xl:justify-start gap-2 px-3 py-1 mb-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-400">
+                Mission Statement
+              </div>
+              <p className="text-lg font-medium text-slate-200 leading-relaxed italic">
+                "To make learning <span className="text-indigo-400">fun</span> and more <span className="text-purple-400">accessible</span> using visual interactions."
+              </p>
+            </div>
+          </div>
+        </aside>
+
         {/* Main Content Area */}
         <div className="flex-1 min-w-0">
-          
-          {/* Profile & Mission Section */}
-        <div className="mb-16 flex flex-col md:flex-row items-center md:items-start justify-between gap-8 bg-slate-900/40 p-8 rounded-3xl border border-slate-800/60 backdrop-blur-sm shadow-xl">
-          <div className="flex-1 space-y-4 text-center md:text-left">
-            <h2 className="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2 mb-6">
-              <User className="w-5 h-5 text-indigo-400" />
-              About the Creator
-            </h2>
-            {githubData ? (
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                <img 
-                  src={githubData.avatar_url || "https://github.com/mehrsachal.png"} 
-                  alt="Profile" 
-                  className="w-24 h-24 rounded-full border-2 border-indigo-500/30 shadow-lg shadow-indigo-500/20"
-                />
-                <div className="flex flex-col items-center md:items-start gap-2">
-                  <a href={githubData.html_url || "https://github.com/mehrsachal"} target="_blank" rel="noreferrer" className="text-2xl font-bold text-slate-100 hover:text-indigo-400 transition-colors flex items-center gap-2 group">
-                    {githubData.name || githubData.login || "Mehr Sachal"}
-                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" />
-                  </a>
-                  <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                    {githubData.bio || "Passionate about interactive learning and geospatial visualizations."}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <div className="animate-pulse flex flex-col md:flex-row gap-6 items-center md:items-start">
-                <div className="w-24 h-24 rounded-full bg-slate-800"></div>
-                <div className="space-y-3 mt-2 md:mt-0">
-                  <div className="w-40 h-6 bg-slate-800 rounded"></div>
-                  <div className="w-48 h-4 bg-slate-800 rounded"></div>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div className="flex-1 space-y-4 border-t md:border-t-0 md:border-l border-slate-800/60 pt-8 md:pt-0 md:pl-10 text-center md:text-left self-stretch flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-400 self-center md:self-start">
-              Mission Statement
-            </div>
-            <p className="text-xl md:text-2xl font-medium text-slate-200 leading-relaxed">
-              "To make learning <span className="text-indigo-400">fun</span> and more <span className="text-purple-400">accessible</span> using visual interactions."
-            </p>
-          </div>
-        </div>
 
         {/* Header Section */}
         <header className="mb-12 text-center md:text-left flex flex-col md:flex-row md:justify-between md:items-end gap-6">
@@ -247,8 +252,8 @@ const Home = () => {
         </div>
         </div>
 
-        {/* Sidebar Area: Training Modules */}
-        <aside className="w-full lg:w-80 xl:w-96 shrink-0 space-y-6">
+        {/* Right Sidebar Area: Training Modules */}
+        <aside className="w-full xl:w-80 2xl:w-96 shrink-0 space-y-6">
           <div className="bg-slate-900/40 p-6 rounded-3xl border border-slate-800/60 backdrop-blur-sm shadow-xl sticky top-24">
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800/60">
               <div className="p-2 bg-indigo-500/20 rounded-xl">
