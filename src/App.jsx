@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
-import { MapPin, ChevronRight, Code, Search, ExternalLink, User } from 'lucide-react';
+import { ChevronRight, Code, Search, ExternalLink, User } from 'lucide-react';
 
 // Dynamically import all JSX files from the visualizations folder
 const visualizationModules = import.meta.glob('./visualizations/*.jsx', { eager: true });
@@ -22,8 +22,9 @@ const visualisations = Object.entries(visualizationModules).map(([path, module])
     category: metadata.category || 'General',
     path: '/' + (metadata.id || fileName.toLowerCase().replace(/[^a-z0-9]+/g, '-')),
     Component: module.default,
+    lastModified: module.__lastModified || 0,
   };
-});
+}).sort((a, b) => a.lastModified - b.lastModified); // Sort chronologically (oldest to newest)
 
 // Premium Landing Page Component
 const Home = () => {
@@ -94,7 +95,7 @@ const Home = () => {
           
           <div className="flex-1 space-y-4 border-t md:border-t-0 md:border-l border-slate-800/60 pt-8 md:pt-0 md:pl-10 text-center md:text-left self-stretch flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-semibold text-indigo-400 self-center md:self-start">
-              OUR MISSION
+              Mission Statement
             </div>
             <p className="text-xl md:text-2xl font-medium text-slate-200 leading-relaxed">
               "To make learning <span className="text-indigo-400">fun</span> and more <span className="text-purple-400">accessible</span> using visual interactions."
@@ -105,10 +106,7 @@ const Home = () => {
         {/* Header Section */}
         <header className="mb-12 text-center md:text-left flex flex-col md:flex-row md:justify-between md:items-end gap-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-slate-800/50 border border-slate-700/50 text-sm font-medium text-slate-300">
-              <MapPin className="w-4 h-4 text-indigo-400" />
-              <span>Interactive Learning Hub</span>
-            </div>
+
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
               Sachal's Interactive Library
             </h1>
