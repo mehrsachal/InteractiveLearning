@@ -178,15 +178,9 @@ const Home = () => {
                     <IconComponent className="w-6 h-6 text-indigo-500" />
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    {viz.status === 'Available' ? (
-                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        {viz.status}
-                      </span>
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-                        {viz.status}
-                      </span>
-                    )}
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800/80 text-slate-400 border border-slate-700/60">
+                      {viz.lastModified ? new Date(viz.lastModified).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Unknown'}
+                    </span>
                     <span className="text-xs font-medium text-slate-500 px-2">
                       {viz.category}
                     </span>
@@ -202,16 +196,10 @@ const Home = () => {
                 </p>
 
                 {/* Card Action */}
-                {viz.status === 'Available' ? (
-                  <Link to={viz.path} className="inline-flex items-center gap-2 font-semibold text-indigo-400 hover:text-indigo-300 transition-colors group/link mt-auto">
-                    <span>Launch Visualisation</span>
-                    <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                ) : (
-                  <div className="inline-flex items-center gap-2 font-semibold text-slate-600 cursor-not-allowed mt-auto">
-                    <span>In Development</span>
-                  </div>
-                )}
+                <Link to={viz.path} className="inline-flex items-center gap-2 font-semibold text-indigo-400 hover:text-indigo-300 transition-colors group/link mt-auto">
+                  <span>Launch Visualisation</span>
+                  <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                </Link>
               </div>
             );
           })}
