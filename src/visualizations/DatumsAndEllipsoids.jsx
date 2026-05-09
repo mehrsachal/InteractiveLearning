@@ -1,7 +1,4 @@
-import React from 'react';
-import { Globe } from 'lucide-react';
-
-const htmlContent = `< !DOCTYPE html >
+< !DOCTYPE html >
     <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -411,7 +408,7 @@ const htmlContent = `< !DOCTYPE html >
                                     targetScale = datums[selected].scale.clone();
 
                                     // Update text
-                                    jumpText.innerHTML = \`<strong>\${datums[selected].name}:</strong> \${datums[selected].desc}\`;
+                                    jumpText.innerHTML = `<strong>${datums[selected].name}:</strong> ${datums[selected].desc}`;
 
                                     // Trigger pulse animation to draw attention
                                     glowMesh.scale.set(1.5, 1.5, 1.5);
@@ -455,8 +452,8 @@ const htmlContent = `< !DOCTYPE html >
                         // Only show if in front of camera
                         if (worldPos.z < 1) {
                             screenMarker.style.display = 'block';
-                        screenMarker.style.left = \`\${x}px\`;
-                        screenMarker.style.top = \`\${y}px\`;
+                        screenMarker.style.left = `${x}px`;
+                        screenMarker.style.top = `${y}px`;
             } else {
                             screenMarker.style.display = 'none';
             }
@@ -497,26 +494,4 @@ const htmlContent = `< !DOCTYPE html >
 
                     </script>
                 </body>
-            </html>`;
-
-export default function EllipsoidsVisualization() {
-  return (
-    <div className="w-full h-full relative border-0 overflow-hidden rounded-xl bg-slate-900">
-      <iframe 
-        srcDoc={htmlContent} 
-        style={{ width: '100%', height: '100%', border: 'none', minHeight: '800px' }} 
-        title="Ellipsoids and Datums"
-        sandbox="allow-scripts allow-same-origin"
-      />
-    </div>
-  );
-}
-
-export const metadata = {
-  id: 'ellipsoids-datums',
-  title: 'ELI5: Ellipsoids & Datum Shifts',
-  description: 'An interactive visualization explaining the difference between the true shape of the Earth (Geoid), mathematical ellipsoids, and how changing datums causes coordinates to shift.',
-  iconName: 'Globe',
-  category: 'GIS Math',
-  status: 'Available'
-};
+            </html>
