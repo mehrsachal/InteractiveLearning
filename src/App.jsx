@@ -235,6 +235,33 @@ const MissingComponentError = ({ title }) => (
   </div>
 );
 
+// Visualization Layout Component
+const VisualizationLayout = ({ viz, children }) => {
+  const IconComponent = Icons[viz.iconName] || Icons.Box;
+  return (
+    <>
+      <header className="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-[100] shadow-md font-sans">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+              <span className="p-1.5 bg-indigo-500/20 rounded-lg">
+                <IconComponent className="w-5 h-5 text-indigo-400" />
+              </span>
+              {viz.title}
+            </h1>
+            <p className="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">{viz.description}</p>
+          </div>
+          <Link to="/" className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-slate-200 rounded-xl transition-all text-sm font-semibold shrink-0 group">
+            <Icons.ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Gallery
+          </Link>
+        </div>
+      </header>
+      {children}
+    </>
+  );
+};
+
 // Main App Component
 function App() {
   return (
@@ -246,7 +273,17 @@ function App() {
           <Route 
             key={viz.id} 
             path={viz.path} 
-            element={Component ? <Component /> : <MissingComponentError title={viz.title} />} 
+            element={
+              Component ? (
+                <VisualizationLayout viz={viz}>
+                  <Component />
+                </VisualizationLayout>
+              ) : (
+                <VisualizationLayout viz={viz}>
+                  <MissingComponentError title={viz.title} />
+                </VisualizationLayout>
+              )
+            } 
           />
         );
       })}
